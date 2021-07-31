@@ -1,0 +1,5 @@
+<resources>
+
+    <string name="application_is_offline">Application is offline</string>
+    <string name="reset">Reset</string>
+</resources>

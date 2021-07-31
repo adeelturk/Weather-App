@@ -1,0 +1,74 @@
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty('android')) {
+            android {
+                compileSdkVersion(AppConfig.targetSdk)
+                defaultConfig {
+                    minSdkVersion(AppConfig.minSdk)
+                    targetSdkVersion(AppConfig.targetSdk)
+                    testInstrumentationRunner(AppConfig.androidTestInstrumentation)
+                    vectorDrawables.useSupportLibrary true
+                    multiDexEnabled true
+                }
+                signingConfigs {
+                    debug {
+                        storeFile file("debug.keystore")
+                        keyAlias 'androiddebugkey'
+                        keyPassword 'android'
+                        storePassword 'android'
+                    }
+
+
+                }
+
+                buildTypes {
+                    production {
+
+                        buildConfigField "String", "API_KEY", '"c0eca97f134a2235e20d2b281e4643ce"'
+                        buildConfigField "String", "END_POINT", '"https://api.openweathermap.org/data/2.5/"'
+                        buildConfigField "String", "CITIES_LIST_URL", '"https://raw.githubusercontent.com/adeelturk/Collapsing-Tool-viewpager-and-tabs/master/cities.json"'
+                        resValue "string", "application_name", "Run MockyIo Production"
+                        signingConfig signingConfigs.debug
+                        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                    }
+
+                    development {
+                        buildConfigField "String", "CITIES_LIST_URL", '"https://raw.githubusercontent.com/adeelturk/Collapsing-Tool-viewpager-and-tabs/master/cities.json"'
+                        buildConfigField "String", "API_KEY", '"c0eca97f134a2235e20d2b281e4643ce"'
+                        buildConfigField "String", "END_POINT", '"https://api.openweathermap.org/data/2.5/"'
+                        resValue "string", "application_name", "Run MockyIo Development"
+                        signingConfig signingConfigs.debug
+
+                    }
+                    release {
+                        buildConfigField "String", "API_KEY", '"c0eca97f134a2235e20d2b281e4643ce"'
+                        buildConfigField "String", "CITIES_LIST_URL", '"https://raw.githubusercontent.com/adeelturk/Collapsing-Tool-viewpager-and-tabs/master/cities.json"'
+                        buildConfigField "String", "END_POINT", '"https://api.openweathermap.org/data/2.5/"'
+                        resValue "string", "application_name", "Run MockyIo "
+                        signingConfig signingConfigs.debug
+                        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+                    }
+
+                    debug {
+                        buildConfigField "String", "API_KEY", '"c0eca97f134a2235e20d2b281e4643ce"'
+                        buildConfigField "String", "CITIES_LIST_URL", '"https://raw.githubusercontent.com/adeelturk/Collapsing-Tool-viewpager-and-tabs/master/cities.json"'
+                        buildConfigField "String", "END_POINT", '"https://api.openweathermap.org/data/2.5/"'
+                        resValue "string", "application_name", "Run MockyIo debug"
+                    }
+                }
+
+                viewBinding {
+                    android.buildFeatures.viewBinding = true
+                    android.buildFeatures.dataBinding = true
+                }
+
+
+                kotlinOptions {
+                    jvmTarget = '1.8'
+                }
+            }
+
+        }
+    }
+}
+
