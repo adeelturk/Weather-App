@@ -15,7 +15,7 @@ val weatherRepoDependencies= module{
     single { WeatherDataMapper() }
 
     //dataSource
-    single { WeatherDataSourceImpl(get(),get(),get())}
+    single { WeatherDataSourceImpl(get(),get(),BuildConfig.API_KEY)}
 
 
 

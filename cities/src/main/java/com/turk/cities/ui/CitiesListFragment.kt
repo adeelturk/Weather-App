@@ -11,13 +11,16 @@ import com.turk.cities.BR
 import com.turk.cities.R
 import com.turk.cities.action.CitiesAction
 import com.turk.cities.databinding.CitiesListFragmentBinding
+import com.turk.cities.routing.CityNavigation
 import com.turk.cities.state.CitiesState
 import com.turk.cities.viewmodel.CitiesViewModel
 import com.turk.common.base.BaseFragment
 import com.turk.common.base.BaseViewModel
 import com.turk.common.base.GeneralAdapter
+import com.turk.common.extension.fault
 import com.turk.dtos.city.City
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CitiesListFragment :BaseFragment<CitiesListFragmentBinding,CitiesState,CitiesAction>() {
@@ -29,6 +32,7 @@ class CitiesListFragment :BaseFragment<CitiesListFragmentBinding,CitiesState,Cit
     override fun getViewModel(): BaseViewModel<CitiesState, CitiesAction> =citiesViewModel
     private val adapter = GeneralAdapter(BR.city, R.layout.city_item, City.DIFF_CALLBACK,mutableListOf(R.id.favouriteBtn))
 
+    private val cityNavigation: CityNavigation by inject()
     override fun initialize(savedInstanceState: Bundle?) {
         setHasOptionsMenu(true)
         binding.viewModel=citiesViewModel
@@ -41,10 +45,15 @@ class CitiesListFragment :BaseFragment<CitiesListFragmentBinding,CitiesState,Cit
                     city.isFavourite=!city.isFavourite
                     dispatchIntent(CitiesAction.UpdateCityFavouriteStatus(city))
                     adapter.notifyItemChanged(index)
+                }else->{
+
+                cityNavigation.showWeatherReport(city)
                 }
             }
 
         }
+
+
         dispatchIntent(CitiesAction.FetchCities)
 
         binding.swipeRefresh.setOnRefreshListener {
@@ -61,6 +70,13 @@ class CitiesListFragment :BaseFragment<CitiesListFragmentBinding,CitiesState,Cit
 
     }
 
+
+    override fun attachListeners() {
+
+        super.attachListeners()
+        fault(citiesViewModel.errorEntity,::handleFailure)
+    }
+
     private lateinit var optionMenu: Menu
     private lateinit var searcItem: MenuItem
     private lateinit var reset_menu: MenuItem
@@ -74,6 +90,10 @@ class CitiesListFragment :BaseFragment<CitiesListFragmentBinding,CitiesState,Cit
 
               binding.swipeRefresh.isRefreshing=true
           }
+            is  CitiesState.Error->{
+
+                binding.swipeRefresh.isRefreshing=false
+            }
 
             is CitiesState.Cities->{
 

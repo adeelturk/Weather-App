@@ -6,6 +6,8 @@ import com.turk.cities.citiesDependencies
 import com.turk.citiesrepository.citiesRepoDependencies
 import com.turk.localpersistance.localPersistenceBeans
 import com.turk.network.networkModule
+import com.turk.weather.weatherDependencies
+import com.turk.weatherapp.navigation.navigationModule
 import com.turk.weatherrepository.weatherRepoDependencies
 
 import org.koin.android.ext.koin.androidContext
@@ -27,8 +29,9 @@ class Application : Application() {
                     citiesRepoDependencies,
                     localPersistenceBeans,
                     citiesDependencies,
-
                     weatherRepoDependencies,
+                    weatherDependencies,
+                    navigationModule,
 
                 )
             )

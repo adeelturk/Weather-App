@@ -9,7 +9,7 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.nav_version}")
         classpath("android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0")
-
+        classpath("com.google.gms:google-services:${Versions.googleServices}")
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle.kts files
     }

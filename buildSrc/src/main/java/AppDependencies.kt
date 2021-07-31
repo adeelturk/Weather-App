@@ -80,6 +80,7 @@ object AppDependencies {
     // Room
     private const val roomRuntime =  "androidx.room:room-runtime:${Versions.room_version}"
 
+    private val googlePlayServices = "com.google.android.gms:play-services-location:${Versions.playServices}"
 
 //    annotationProcessor "androidx.room:room-compiler:$room_version"
 //    kapt "android.arch.persistence.room:compiler:1.0.0"
@@ -108,6 +109,8 @@ object AppDependencies {
         add(kotlinSerialization)
         add(retrofitLogging)
         add(swiperefreshlayoutX)
+        add(googlePlayServices)
+
     }
 
     val koinLibraries=arrayListOf<String>().apply {

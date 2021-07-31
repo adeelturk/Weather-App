@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="note">Note</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="you_must_allow_all_permissions_to_continue">You must allow all permissions to continue</string>
+    <string name="ok_msg">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="for_more_accurate_result_allow_location">Please allow permission to get more accurate results</string>
+    <string name="loading_message">Fetching you location and weather report</string>
+    <string name="temprature">Temprature</string>
+    <string name="celcius">Celcius</string>
+    <string name="kelivin">Kelivin</string>
+</resources>

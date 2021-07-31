@@ -31,6 +31,31 @@ fun <T> RecyclerView.bindRecyclerViewAdapter(adapter: ListAdapter<*, *>, list: L
     }
 }
 
+
+@BindingAdapter(value = ["showHorizontalList", "items"], requireAll = false)
+fun <T> RecyclerView.bindHorizontalRecyclerViewAdapter(adapter: ListAdapter<*, *>, list: List<T>?) {
+    this.run {
+        this.configureHorizontalList(adapter, 4)
+        this.adapter = adapter
+    }
+    if (this.adapter is ListAdapter<*, *>) {
+        (adapter as ListAdapter<T, *>).submitList(list)
+
+    }
+}
+
+fun <T, VH : RecyclerView.ViewHolder> RecyclerView.configureHorizontalList(
+    adapter: ListAdapter<T, VH>,
+    margin: Int = 20.toPx(),
+) {
+
+    layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+    setHasFixedSize(true)
+    addItemMargins(margin, MarginStrategy.ALL_SIDES)
+    this.adapter = adapter
+
+}
+
 fun <T, VH : RecyclerView.ViewHolder> RecyclerView.configureVerticalList(
     adapter: ListAdapter<T, VH>,
     margin: Int = 20.toPx(),

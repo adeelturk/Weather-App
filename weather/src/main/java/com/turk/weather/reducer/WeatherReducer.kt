@@ -14,6 +14,15 @@ class WeatherReducer : Reducer<WeatherState, WeatherAction> {
 
                 WeatherState.DEFAULT
             }
+            is WeatherAction.SwipeRefreshLoading -> {
+
+                WeatherState.SwipeRefreshLoading
+            }
+            is WeatherAction.DisplayWeatherForecastData -> {
+
+                stateToFetchForecastWeatherData(action)
+            }
+
             is WeatherAction.FetchCurrentWeather -> {
                 stateToFetchCurrentWeatherData()
             }
@@ -21,17 +30,27 @@ class WeatherReducer : Reducer<WeatherState, WeatherAction> {
             is WeatherAction.DisplayWeatherData -> {
                 stateToDisplayWeatherData(action)
             }
+            is WeatherAction.GetLocationAndRefresh->{
+                WeatherState.GetLocationAndRefresh
+            }
 
             is WeatherAction.Error -> {
 
                 stateOnError(action)
             }
 
+
             else -> {
                 currentState
             }
         }
     }
+
+    private fun stateToFetchForecastWeatherData(action:WeatherAction.DisplayWeatherForecastData): WeatherState {
+
+        return WeatherState.WeatherForecastData(action.data)
+    }
+
 
     private fun stateToFetchCurrentWeatherData(): WeatherState {
 

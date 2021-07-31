@@ -65,6 +65,6 @@ dependencies {
     implementation(project(":weatherRepository"))
     implementation(project(":weather"))
     implementation(project(":LocalPersistance"))
-
+    implementation(project(":dtos"))
 
 }

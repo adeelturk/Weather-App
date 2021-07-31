@@ -2,9 +2,29 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/cities_navigation">
+    app:startDestination="@id/weatherReportFragment">
 
-    <include app:graph="@navigation/cities_navigation" />
+    <fragment
+        android:id="@+id/citiesListFragment"
+        android:name="com.turk.cities.ui.CitiesListFragment"
+        android:label="CitiesListFragment" >
+        <action
+            android:id="@+id/action_citiesListFragment_to_weatherReportFragment"
+            app:destination="@id/weatherReportFragment" />
+
+        <argument android:name="selectedCity"
+            app:argType="com.turk.dtos.city.City"/>
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/weatherReportFragment"
+        android:name="com.turk.weather.ui.WeatherReportFragment"
+        android:label="WeatherReportFragment" >
+        <action
+            android:id="@+id/action_weatherReportFragment_to_citiesListFragment"
+            app:destination="@id/citiesListFragment" />
+    </fragment>
 
 
 </navigation>

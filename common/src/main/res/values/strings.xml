@@ -19,4 +19,10 @@
     <string name="most_popular">Most Popular</string>
     <string name="ny_times">New York Times</string>
 
+    <string name="location_cant_be_fetched_relaunch_app">Location can\'t be fetched! Enable your location providers and relaunch the application</string>
+    <string name="location_provider_disabled_enable_it">Your location providers seems to be disabled, you must enable it</string>
+    <string name="gps_disabled_enable_it">Your GPS seems to be disabled, you must enable it</string>
+    <string name="network_location_disabled">Your Network location provider seems to be disabled, you must enable it</string>
+
+
 </resources>

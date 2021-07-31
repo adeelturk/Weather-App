@@ -11,7 +11,7 @@ dependencies {
     implementation(project(":common"))
     implementation(project(":dtos"))
     implementation(project(":business"))
-
+    implementation( "com.google.android.flexbox:flexbox:3.0.0")
 
 }
 kapt {

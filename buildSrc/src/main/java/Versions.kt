@@ -4,7 +4,7 @@ object Versions {
     const val gradle = "4.2.1"
     const val kotlin = "1.5.21"
     const val nav_version = "2.3.4"
-
+    const val googleServices = "4.3.5"
     //libs
     const val coreKtx = "1.2.0"
     const val appcompat = "1.3.0-alpha01"
@@ -31,5 +31,6 @@ object Versions {
     const val dex_version = "2.0.1"
     const val room_version="2.1.0"
 
+    val playServices = "17.1.0"
 
 }

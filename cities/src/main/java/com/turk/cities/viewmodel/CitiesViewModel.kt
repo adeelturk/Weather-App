@@ -8,8 +8,11 @@ import com.turk.cities.reducer.CitiesReducer
 import com.turk.cities.state.CitiesState
 import com.turk.common.base.BaseViewModel
 import com.turk.dtos.city.City
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 class CitiesViewModel(private val citiesListUrl:String,
                       private val citiesListUseCase:CitiesListUseCase,
@@ -39,8 +42,8 @@ class CitiesViewModel(private val citiesListUrl:String,
         }
     }
 
-    private val _cities=MutableStateFlow(listOf<City>())
-    val cities:StateFlow<List<City>> =_cities
+    private val _cities=MutableSharedFlow<List<City>>()
+    val cities:SharedFlow<List<City>> =_cities
 
     private fun fetchCitiesList(){
 
@@ -49,7 +52,10 @@ class CitiesViewModel(private val citiesListUrl:String,
             it.either(::handleFailure){dataList->
 
                 dispatch(CitiesAction.PostCities(dataList))
-                _cities.value=dataList
+                viewModelScope.launch {
+                    _cities.emit(dataList)
+                }
+
             }
 
         }
@@ -62,7 +68,9 @@ class CitiesViewModel(private val citiesListUrl:String,
             it.either(::handleFailure){dataList->
 
                 dispatch(CitiesAction.PostCities(dataList))
-                _cities.value=dataList
+                viewModelScope.launch {
+                    _cities.emit(dataList)
+                }
             }
 
         }
