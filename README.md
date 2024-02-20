@@ -53,5 +53,3 @@ A special module within the project to manage dependencies and whatnot.
 
 ## Helping sources 
 https://proandroiddev.com/multi-flavoured-kotlin-dsl-build-script-for-android-app-2d51577e76fb
-
-http://tgmoney.com/tgmoney
